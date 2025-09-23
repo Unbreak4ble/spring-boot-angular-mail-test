@@ -25,5 +25,4 @@ public class MainController {
 		
 		return ResponseEntity.status(200).body("Feito.");
 	}
-
 }
