@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                background-color: #f4f4f4;
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                color: black;
+            }
+            .header {
+                background-color: #007bff;
+                color: #ffffff;
+                padding: 10px;
+                width: calc(100% - 10px*2);
+                text-align: center;
+                border-radius: 8px 8px 0 0;
+            }
+            .container {
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 20px;
+                background-color: #ffffff;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            .content {
+                width: calc(100% - 20px*2);
+                padding: 20px;
+            }
+            .button {
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: #007bff;
+                color: white;
+                text-decoration: none;
+                border-radius: 5px;
+            }
+            .main-center {
+                width: 100%;
+                text-align: center;
+            }
+            .end {
+                width: 100%;
+                padding: 0px 20px;
+            }
+            .info {
+                font-size: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>Olá, <a th:text="${name}">Anonimo</a>!</h1>
+            </div>
+            <div class="content">
+                <div class="main-center">
+                    <h1>Recebemos o seu Email</h1>
+                </div>
+                <p class="info">Fila <a style="color: grey;" th:text="${queue_num}">null</a>°</p>
+                <p class="info">Expectativa de tempo <a style="color: grey;" th:text="${expected_timeleft}">null</a></p>
+            </div>
+            <div class="end">
+                <p>Agora é só aguardar. Atenciosamente, equipe SAJUDH.</p>
+                <p><a href="https://youtu.be/dQw4w9WgXcQ" class="button" style="text-decoration: none; color: white;">RECEBA!!!</a></p>
+            </div>
+        </div>
+    </body>
+</html>

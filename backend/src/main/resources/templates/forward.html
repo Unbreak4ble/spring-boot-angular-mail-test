@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                background-color: #f4f4f4;
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                color: black;
+            }
+            .header {
+                background-color: #007bff;
+                color: #ffffff;
+                padding: 10px;
+                width: calc(100% - 10px*2);
+                text-align: center;
+                border-radius: 8px 8px 0 0;
+            }
+            .container {
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 20px;
+                background-color: #ffffff;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            .content {
+                width: 100%;
+            }
+            .button {
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: #007bff;
+                color: white;
+                text-decoration: none;
+                border-radius: 5px;
+            }
+            .main-center {
+                width: 100%;
+                text-align: center;
+            }
+            .end {
+                width: 100%;
+                padding: 0px 20px;
+            }
+            .info {
+                font-size: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>Cliente <a th:text="${name}"></a></h1>
+            </div>
+            <div class="metadata">
+                <p class="info">Email <a style="color: grey;" th:text="${from_email}">null</a></p>
+            </div>
+            <div class="content">
+                <p th:text="${text}"></p>
+            </div>
+        </div>
+    </body>
+</html>
