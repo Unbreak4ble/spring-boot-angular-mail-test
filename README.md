@@ -1,2 +1,2 @@
 # Description
-Testing Spring Boot mail with Angular.
+Testando Spring Boot mail com framework Angular.
