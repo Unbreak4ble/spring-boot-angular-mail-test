@@ -10,6 +10,7 @@
             <div class="input">
                 <input type="text" placeholder="Ex: Rafael" #input_name/>
             </div>
+            <a class="field-error-message" name="name"></a>
         </div>
         <div class="field">
             <div class="icon-label">
@@ -21,6 +22,7 @@
             <div class="input">
                 <input type="text" placeholder="Ex: Fernandes" #input_latername/>
             </div>
+            <a class="field-error-message" name="surname"></a>
         </div>
     </div>
     <div class="fields extensive">
@@ -34,6 +36,7 @@
             <div class="input">
                 <input type="text" placeholder="Ex: rafael@gmail.com" #input_email/>
             </div>
+            <a class="field-error-message" name="email"></a>
         </div>
     </div>
     <div class="fields extensive">
@@ -47,12 +50,16 @@
             <div class="input">
                 <input type="text" placeholder="Ex: Preciso de ajuda com problemas comerciais." #input_title/>
             </div>
+            <a class="field-error-message" name="title"></a>
         </div>
     </div>
     <div class="description">
         <textarea placeholder="Mensagem" #input_message></textarea>
+        <a class="field-error-message" name="message"></a>
     </div>
     <div class="actions">
         <button (click)="send()">Enviar</button>
     </div>
+    
+    <a id="final-message"></a>
 </div>

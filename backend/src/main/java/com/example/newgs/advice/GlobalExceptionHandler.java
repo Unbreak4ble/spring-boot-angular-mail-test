@@ -1,10 +1,5 @@
 package com.example.newgs.advice;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -14,20 +9,19 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-@ControllerAdvice
+import com.example.newgs.DTOs.response.SendFieldNotValidDTO;
+import com.example.newgs.controllers.EmailController;
+
+@ControllerAdvice(assignableTypes = {EmailController.class})
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
-    
+
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
-        Map<String, List<String>> body = new HashMap<>();
-
-        List<String> errors = ex.getBindingResult()
-            .getFieldErrors()
-            .stream()
-            .map(DefaultMessageSourceResolvable::getDefaultMessage)
-            .collect(Collectors.toList());
-
-        body.put("errors", errors);
+        SendFieldNotValidDTO body = new SendFieldNotValidDTO();
+        
+        ex.getBindingResult().getFieldErrors().forEach(error -> {
+            body.fields.add(SendFieldNotValidDTO.createFieldProperty(error.getField(), error.getDefaultMessage()));
+        });
     
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }

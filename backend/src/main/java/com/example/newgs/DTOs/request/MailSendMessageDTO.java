@@ -1,4 +1,4 @@
-package com.example.newgs.DTOs;
+package com.example.newgs.DTOs.request;
 
 import jakarta.validation.constraints.*;
 import lombok.Data;

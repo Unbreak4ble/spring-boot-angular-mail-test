@@ -68,7 +68,7 @@
             border: none;
             outline: none;
             width: calc(100% - 10px*2);
-            height: calc(100% - 10px*2);
+            height: 100px;// calc(100% - 10px*2);
             resize: none;
         }
     }
@@ -87,5 +87,9 @@
             background: rgb(214, 214, 214);
             cursor: pointer;
         }
+    }
+    
+    .field-error-message {
+        color: rgb(255, 119, 119);
     }
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { EmailResponse404DTO } from '../../../shared/DTOs/email.404.dto';
 import { EmailResponse200DTO } from '../../../shared/DTOs/email.200.dto';
 import { EmailResponse500DTO } from '../../../shared/DTOs/email.500.dto';
+import { EmailResponse400DTO } from '../../../shared/DTOs/email.400.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class EmailService {
 
   constructor() { }
   
-  async send(name:string, surname:string, email:string, title:string, message:string): Promise<EmailResponse200DTO|EmailResponse404DTO|EmailResponse500DTO> {
+  async send(name:string, surname:string, email:string, title:string, message:string): Promise<EmailResponse200DTO|EmailResponse400DTO|EmailResponse404DTO|EmailResponse500DTO> {
     this._available = false;
     
     const payload = {
@@ -41,6 +42,10 @@ export class EmailService {
     switch(response.status){
       case 200:
         return { status: 200, message: await response.text() };
+      break;
+      
+      case 400:
+        return { status: 400, message: await response.json() };
       break;
       
       case 404:

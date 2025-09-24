@@ -1,4 +1,4 @@
-import { Component, ElementRef, input, ViewChild, ViewChildren } from '@angular/core';
+import { asNativeElements, Component, ElementRef, input, ViewChild, ViewChildren } from '@angular/core';
 import { EmailService } from '../../../core/services/email/email.service';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -15,6 +15,9 @@ export class EmailFormComponent {
   @ViewChild("input_title") element_title: ElementRef|null = null;
   @ViewChild("input_message") element_message: ElementRef|null = null;
   
+  private fieldMessagesElements: Element[] = [];
+  private finalMessageElement:Element|null = null;
+  
   constructor(private sanitizer: DomSanitizer, private elementRef: ElementRef, private emailService: EmailService){
     
   }
@@ -23,10 +26,16 @@ export class EmailFormComponent {
     
   }
   
+  ngAfterViewInit(){
+    this.fieldMessagesElements = this.elementRef.nativeElement?.querySelectorAll(".field-error-message") || [];
+    this.finalMessageElement = this.elementRef.nativeElement?.querySelector("#final-message");
+  }
+  
   validateAll = ():Boolean => !!this.element_name && !!this.element_latername && !!this.element_email && !!this.element_title && !!this.element_message;
   
   async send(){
     if(!this.validateAll()) return;
+    
     const name = this.element_name?.nativeElement.value,
           surname = this.element_latername?.nativeElement.value,
           email = this.element_email?.nativeElement.value,
@@ -35,10 +44,36 @@ export class EmailFormComponent {
           
     if(!this.emailService.available) return;
     
-    console.log("Enviando");
+    this.eraseTextMessages();
+    this.showFinalStatusMessage("Enviando...");
     
     const response_data = await this.emailService.send(name, surname, email, title, message);
+    
+    if(response_data.status == 200)
+      this.showFinalStatusMessage(response_data.message);
+    else if(response_data.status == 400 && response_data.message.type == "field")
+      this.showFieldErrors(response_data.message.fields);
+  }
   
-    console.log("recebido:", response_data);
+  showFieldErrors(fields:any){
+    for(const fieldMessageElement of this.fieldMessagesElements){
+      const field = fields.filter((x:any) => x.field == fieldMessageElement.getAttribute('name'))[0];
+      
+      if(field == null) continue;
+      
+      (fieldMessageElement as any).text = field.message;
+    }
+  }
+  
+  eraseTextMessages(){
+    (this.finalMessageElement as any).text = "";
+    
+    for(const fieldMessageElement of this.fieldMessagesElements){
+      (fieldMessageElement as any).text = "";
+    }
+  }
+  
+  showFinalStatusMessage(message:string){
+    (this.finalMessageElement as any).text = message;
   }
 }

@@ -6,18 +6,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.newgs.DTOs.MailSendMessageDTO;
+import com.example.newgs.DTOs.request.MailSendMessageDTO;
 import com.example.newgs.services.MailService;
 
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/email")
-public class MainController {
+public class EmailController {
 
 	private MailService mailservice;
 
-	public MainController(MailService _mailservice){
+	public EmailController(MailService _mailservice){
 		this.mailservice = _mailservice;
 	}
 

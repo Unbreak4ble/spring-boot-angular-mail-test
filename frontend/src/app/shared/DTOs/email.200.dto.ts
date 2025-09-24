@@ -1,7 +1,5 @@
 
 export interface EmailResponse200DTO {
     status: 200,
-    message: {
-        
-    }
+    message: string
 };
