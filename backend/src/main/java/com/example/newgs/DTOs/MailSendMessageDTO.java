@@ -15,7 +15,7 @@ public class MailSendMessageDTO {
     
     @NotEmpty(message = "Email não pode estar vazio")
     @Pattern(regexp = "^[A-Za-z0-9+_.-]+@(.+)$", message = "Email invalido")
-    @Size(min = 3, max = 64, message = "Nome deve ter entre 5 à 64 caracteres")
+    @Size(min = 6, max = 64, message = "Email deve ter entre 6 à 64 caracteres")
     public String email;
     
     @NotEmpty(message = "Nome não pode estar vazio")

@@ -23,7 +23,7 @@ public class MainController {
 
 	@PostMapping("/send")
 	public ResponseEntity<String> index(@Valid @RequestBody MailSendMessageDTO body) throws Exception {
-		//mailservice.send(body.message, body.email, body.name);
+		mailservice.send(body.message, body.email, body.name);
 		
 		return ResponseEntity.status(200).body("Feito.");
 	}
