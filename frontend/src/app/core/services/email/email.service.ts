@@ -40,15 +40,15 @@ export class EmailService {
 
     switch(response.status){
       case 200:
-        return { status: 200, message: await response.json() };
+        return { status: 200, message: await response.text() };
       break;
       
       case 404:
-        return { status: 404, message: await response.json() };
+        return { status: 404, message: await response.text() };
       break;
       
       case 500:
-        return { status: 500, message: await response.json() };
+        return { status: 500, message: await response.text() };
       break;
     };
     

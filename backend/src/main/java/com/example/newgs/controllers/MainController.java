@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.newgs.DTOs.MailSendMessageDTO;
 import com.example.newgs.services.MailService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/email")
 public class MainController {
@@ -20,8 +22,8 @@ public class MainController {
 	}
 
 	@PostMapping("/send")
-	public ResponseEntity<String> index(@RequestBody MailSendMessageDTO body) throws Exception {
-		mailservice.send(body.message, body.email, body.name);
+	public ResponseEntity<String> index(@Valid @RequestBody MailSendMessageDTO body) throws Exception {
+		//mailservice.send(body.message, body.email, body.name);
 		
 		return ResponseEntity.status(200).body("Feito.");
 	}

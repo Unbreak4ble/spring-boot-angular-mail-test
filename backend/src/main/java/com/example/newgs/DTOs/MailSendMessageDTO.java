@@ -1,15 +1,15 @@
 package com.example.newgs.DTOs;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.*;
+import lombok.Data;
 
+@Data
 public class MailSendMessageDTO {
-    @NotEmpty(message = "Mensagem não pode estar vazia")
+    @NotBlank(message = "Mensagem não pode estar vazia")
     @Size(min = 16, max = 4096, message = "Mensagem deve ter entre 16 à 4096 caracteres")
     public String message;
     
-    @NotEmpty(message = "Titulo não pode estar vazio")
+    @NotBlank(message = "Titulo não pode estar vazio")
     @Size(min = 8, max = 64, message = "Titulo deve ter entre 8 à 64 caracteres")
     public String title;
     
