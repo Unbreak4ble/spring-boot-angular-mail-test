@@ -1,0 +1,35 @@
+networks:
+  sa-interface:
+    external: true
+
+
+services:
+  nginx:
+    image: nginx
+    container_name: gateway_sa
+    hostname: gateway.docker.sa
+    restart: always
+    networks:
+      - sa-interface
+    ports:
+      - "80:80"
+    volumes:
+      - "./gateway/nginx.conf:/etc/nginx/nginx.conf"
+
+  backend:
+    build: ./backend
+    restart: always
+    hostname: backend.docker.sa
+    networks:
+      - sa-interface
+    container_name: backend_sa
+
+  frontend:
+    build: ./frontend
+    restart: always
+    hostname: frontend.docker.sa
+    networks:
+      - sa-interface
+    container_name: frontend_sa
+    volumes:
+      - "./frontend:/app"
