@@ -8,7 +8,7 @@ import { EmailResponse400DTO } from '../../../shared/DTOs/email.400.dto';
   providedIn: 'root'
 })
 export class EmailService {
-  private readonly _url:string = "http://localhost:8080/email";
+  private readonly _url:string = "/api/email";
   private readonly _url_send:string = this._url + "/send";
   private _available: boolean = true;
   

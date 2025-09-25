@@ -47,12 +47,20 @@ export class EmailFormComponent {
     this.eraseTextMessages();
     this.showFinalStatusMessage("Enviando...");
     
-    const response_data = await this.emailService.send(name, surname, email, title, message);
-    
-    if(response_data.status == 200)
-      this.showFinalStatusMessage(response_data.message);
-    else if(response_data.status == 400 && response_data.message.type == "field")
-      this.showFieldErrors(response_data.message.fields);
+    try {
+      const response_data = await this.emailService.send(name, surname, email, title, message);
+      
+      this.showFinalStatusMessage('');
+      
+      if(response_data.status == 200)
+        this.showFinalStatusMessage(response_data.message);
+      else if(response_data.status == 400 && response_data.message.type == "field")
+        this.showFieldErrors(response_data.message.fields);
+      else
+      this.showFinalStatusMessage('Erro interno desconhecido.');
+    }catch{
+      this.showFinalStatusMessage('Erro local desconhecido.');
+    }
   }
   
   showFieldErrors(fields:any){
